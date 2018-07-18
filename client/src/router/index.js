@@ -4,6 +4,8 @@ import index from '@/components/index'
 import register from '@/components/register'
 import login from '@/components/login'
 import practice from '@/components/practice'
+import lottery from '@/components/lottery'
+import list from '@/components/list'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +27,14 @@ export default new Router({
       path: '/practice',
       name: 'practice',
       component: practice
+    }, {
+      path: '/lottery',
+      name: 'lottery',
+      component: lottery
+    }, {
+      path: '/list',
+      name: 'list',
+      component: list
     }
   ]
 })
