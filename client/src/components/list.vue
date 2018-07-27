@@ -116,23 +116,23 @@
 				let _this = this;
 				_this.indexa = ''
 				_this.indexb = ''
-				_this.winnum = Math.floor(Math.random() * Number(_this.prize_list.length - 1));
+				_this.winnum = Math.floor(Math.random() * Number(_this.prize_list.length - 1))
 				console.log(_this.winnum)
 				_this.rotating(_this.winnum)
 			},
 			setSan() {
 				let _this = this
-				_this.arrOne = [];
-				_this.arrTwo = [];
-				_this.rotate_angle = "rotate(" + Math.floor(-360 * 100 / _this.prize_list.length) / 200 + "deg)";
-				_this.start_rotating_degree = Math.floor(-360 * 100 / _this.prize_list.length) / 200;
+				_this.arrOne = []
+				_this.arrTwo = []
+				_this.rotate_angle = 'rotate(' + Math.floor(-360 * 100 / _this.prize_list.length) / 200 + 'deg)'
+				_this.start_rotating_degree = Math.floor(-360 * 100 / _this.prize_list.length) / 200
 				for(var i = 0; i < _this.prize_list.length; i++) {
 					_this.prize_list[i].troter = "rotate(" + Math.floor(360 * 100 / _this.prize_list.length) / 100 * (0.5 + Number(i)) + "deg) translateX(-50%)"
-					_this.prize_list[i].width = Math.floor(3.14 * 5.6 / this.prize_list.length) + "rem"
+					_this.prize_list[i].width = Math.floor(3.14 * 5.6 / this.prize_list.length) + 'rem'
 					var item = {
 						value: _this.prize_list[i].name,
 						zIndex: Number(i) + 1,
-						deg: "rotate(" + Math.floor(360 * 100 / this.prize_list.length) * i / 100 + "deg)",
+						deg: 'rotate(' + Math.floor(360 * 100 / this.prize_list.length) * i / 100 + 'deg)',
 						degnum: i,
 					}
 					if(i < _this.prize_list.length / 2) {
@@ -143,13 +143,13 @@
 				}
 			},
 			rotating(index) { //转盘转动函数，index值为中奖的下标，后台会返回中奖的id，这边会首先for循环判断中奖的下标
-				let _this = this;
-				_this.rotate_transition = "transform 6s cubic-bezier(0.25,0.1,0.01,1)";
-				if(!_this.click_flag) return;
+				let _this = this
+				_this.rotate_transition = 'transform 6s cubic-bezier(0.25,0.1,0.01,1)'
+				if(!_this.click_flag) return
 				var type = 0; // 默认为 0  转盘转动 1 箭头和转盘都转动(暂且遗留)
-				var during_time = 5; // 默认为1s
+				var during_time = 5 // 默认为1s
 				var result_index = index; // 最终要旋转到哪一块，对应prize_list的下标
-				var rand_circle = 6; // 附加多转几圈，2-3
+				var rand_circle = 6 // 附加多转几圈，2-3
 				_this.click_flag = false; // 旋转结束前，不允许再次触发
 				if(type == 0) {
 					if(this.start_rotating_degree < 0) {
@@ -157,30 +157,30 @@
 					} else {
 						this.start_rotating_degree = this.start_rotating_degree + Math.floor(360 * 100 / _this.prize_list.length) / 200
 					}
-					var rotate_angle = this.start_rotating_degree + 360 * 10 + Math.floor(-360 * 100 / this.prize_list.length) / 200 - Math.floor(360 * 100 / this.prize_list.length) * result_index / 100;
-					this.start_rotating_degree = rotate_angle;
-					_this.rotate_angle = "rotate(" + rotate_angle + "deg)";
+					var rotate_angle = this.start_rotating_degree + 360 * 10 + Math.floor(-360 * 100 / this.prize_list.length) / 200 - Math.floor(360 * 100 / this.prize_list.length) * result_index / 100
+					this.start_rotating_degree = rotate_angle
+					_this.rotate_angle = 'rotate(' + rotate_angle + 'deg)'
 					// 旋转结束后，允许再次触发
 					setTimeout(function() {
-						_this.click_flag = true;
+						_this.click_flag = true
 						if(_this.winnum < _this.prize_list.length / 2) {
 							_this.indexb = ''
-							_this.indexa = _this.winnum;
+							_this.indexa = _this.winnum
 						} else {
 							_this.indexa = ''
-							_this.indexb = _this.winnum - (_this.arrOne.length);
+							_this.indexb = _this.winnum - (_this.arrOne.length)
 						}
 						setTimeout(function() {
-							_this.game_over();
+							_this.game_over()
 						}, 100)
-					}, during_time * 1000 + 1500); // 延时，保证转盘转完
+					}, during_time * 1000 + 1500) // 延时，保证转盘转完
 				}
 			},
 			game_over() {
 				let _this = this;
 				_this.prizetype = 1
 				if(_this.prizetype != -1) {
-					_this.toast_control = true;
+					_this.toast_control = true
 				} else {
 					Alert.show("奖品已领完，下次请早到哦！")
 				}

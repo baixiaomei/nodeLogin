@@ -3,7 +3,7 @@
     <div class='pointer'  @click='action' :style="{transform:rotate_angle,transition:rotate_transition}"></div>
     <div class='rotate' id='rotate'>
       <!-- <div class='prize prize_1' style='transform: rotate(0deg) translateX(0%); width:80px;' >苹果6s</div> -->
-      <div v-for="item in list" :class='"prize prize_" + item.id' :key="id" :style='"transform: rotate(" + item.id * 45 + "deg) translateX(-50%); width:80px;"'>{{item.name}}</div>
+      <div v-for="item in list" :class='"prize prize_" + item.id' :key="item.id" :style='"transform: rotate(" + item.id * 45 + "deg) translateX(-50%); width:80px;"'>{{item.name}}</div>
       <!-- <div class='prize prize_1' style='transform: rotate(0deg) translateX(-50%); width:80px;' >苹果6s/div> -->
       <!-- <div class='prize prize_2' style='transform: rotate(45deg) translateX(-50%); width:80px;' >谢谢参与</div>
       <div class='prize prize_3' style='transform: rotate(90deg) translateX(-50%); width:80px;' >充电宝</div>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import random from '../utils/util'
+// import random from '../utils/util'
 export default {
   data () {
     return {
@@ -49,8 +49,7 @@ export default {
           'name': '14元',
           'id': 4,
           'type': '优惠券'
-        }, 
-        {
+        }, {
           'name': '15元',
           'id': 5,
           'type': '优惠券'
@@ -75,24 +74,23 @@ export default {
     /* 点击开始抽奖按钮 */
     action () {
       /* 中奖下标 */
-      this.winnum = Math.floor(Math.random() * Number(this.list.length - 1));
+      this.winnum = Math.floor(Math.random() * Number(this.list.length - 1))
       this.rotating(this.winnum)
     },
     rotating (index) {
       console.log(index)
       var result_index = index
-      this.rotate_transition = "transform 6s cubic-bezier(0.25,0.1,0.01,1)"
+      this.rotate_transition = 'transform 6s cubic-bezier(0.25,0.1,0.01,1)'
       if (this.start_rotating_degree < 0) {
         this.start_rotating_degree = 0
       } else {
         this.start_rotating_degree = this.start_rotating_degree + Math.floor(360 * 100 / this.list.length) / 200
       }
 
-      var rotate_angle = this.start_rotating_degree + 360 * 10 + Math.floor(-360 * 100 / this.list.length) / 200 - Math.floor(360 * 100 / this.list.length) * result_index / 100;
-      this.start_rotating_degree = rotate_angle;
-      this.rotate_angle = "rotate(" + rotate_angle + "deg)";
+      var rotate_angle = this.start_rotating_degree + 360 * 10 + Math.floor(-360 * 100 / this.list.length) / 200 - Math.floor(360 * 100 / this.list.length) * result_index / 100
+      this.start_rotating_degree = rotate_angle
+      this.rotate_angle = 'rotate(' + rotate_angle + 'deg)'
       console.log(rotate_angle)
-          
     }
   }
 }
