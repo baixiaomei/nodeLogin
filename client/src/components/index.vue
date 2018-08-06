@@ -5,7 +5,6 @@
       <div class='register' @click='goRegisterEvent'>注册</div>
     </div>
     <div class='tableBox' v-if='!noToken'>
-      <div class='mask'></div>
       <div class='nav'>
         <div class='navContainer'>
           <div class='logo'>
@@ -16,75 +15,60 @@
           <div class='menu'>
             <span class='menuIcon'></span>
             <ul>
-              <li>
-                <a href="" data-hover='HOME'>HOME</a>
-              </li>
-              <li>
-                <a href="" data-hover='ABOUT'>ABOUT</a>
-              </li>
-              <li>
-                <a href="" data-hover='GALLERY'>GALLERY</a>
-              </li>
-              <li>
-                <a href="" data-hover='BLOGS'>BLOGS</a>
-              </li>
-              <li>
-                <a href="" data-hover='SERVICES'>SERVICES</a>
-              </li>
-              <li>
-                <a href="" data-hover='CONTACT'>CONTACT</a>
+              <li v-for='item in section' :key='item.id'>
+                <a :href="item.href" :data-hover='item.name'>{{item.name}}</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <!-- <el-row  v-if='!noToken'>
-        <el-col :span="24">
-          <div class="grid-content bg-purple-dark title">{{msg}}</div>
-        </el-col>
-      </el-row> -->
-      <div class='md'>
-        <a href="#mao1">点击我跳转mao1</a>
-        <a href="#mao2">点击我跳转mao2</a>
-        <a href="#mao3">点击我跳转mao3</a>
-      </div>
       <div class='mao1'>
         <a href="" id='mao1'>mao1</a>
       </div>
       <div class='mao2'>
-        <a href="" id='mao2'>mao2</a>
+        <!--下载图片-->
+        <a href="../static/blog.png" download="blogd" id='mao2'>
+          mao2
+        </a>
       </div>
       <div class='mao3'>
-        <a href="" id='mao3'>mao3</a>
+        <a href="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png" download="baidu" id='mao3'>mao3</a>
+      </div>
+      <div class='mao4'>
+        <a href="../static/down.txt" download='2.txt' id='mao4'>mao4</a>
+      </div>
+      <div class='mao5'>
+        <a href="" id='mao5'>mao5
+          <div id='qrcode'>二维码的位置</div>
+        </a>
+      </div>
+      <div class='mao6'>
+        <a href="" id='mao6'>mao6</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+// import QRCode from 'qrcode'
+// import $ from 'jquery'
 export default {
   name: 'index',
   data () {
     return {
       noToken: true,
-      msg: 'Welcome to Your Vue.js App'
+      section: []
     }
   },
-  beforeCreate () {
-    console.group('----beforeCreate创建前状态----')
-    console.log('%c%s', 'color:red', 'el:' + this.$el)
-    console.log('%c%s', 'color:red', 'data:' + this.$data)
-    console.log('%c%s', 'color:red', 'el:' + this.$el)
-  },
   created () { // 还没有初始化el  el是挂载的dom
-    console.log(this.$refs.index)
-    console.log(sessionStorage.getItem('token'))
     if (sessionStorage.getItem('token')) {
       this.noToken = false
     }
-  },
-  mounted () { // el才加载完毕
-    console.log(this.$refs.index)
+    this.$http.post('http://localhost:3000/section').then(res => {
+      if (res.data.code === 200) {
+        this.section = res.data.result
+      }
+    })
   },
   methods: {
     goRegisterEvent () {
@@ -93,6 +77,11 @@ export default {
     goLoginEvent () {
       this.$router.push({name: 'login'})
     }
+  },
+  mounted () { // el才加载完毕
+    this.$nextTick(() => {
+      // 保证 this.$el 已经插入文档
+    })
   }
 }
 </script>
@@ -101,16 +90,18 @@ export default {
 <style scoped lang='less'>
 @color: #ddd;
 @align: center;
-.mao1,.mao2,.mao3{
+
+.mao1,.mao2,.mao3,.mao4,.mao5,.mao6{
   width:100%;
-  height:500px;
+  height:100%;
 }
 #index{
   width:100%;
+  height:100%;
   color: #000;
   .tableBox{
     width:100%;
-
+    height:100%;
     .nav{
       position:fixed;
       top:0;
@@ -120,7 +111,7 @@ export default {
       .navContainer{
         overflow:hidden;
         box-sizing: border-box;
-        padding:0 15px;
+        padding:0 0 0 15px;
         margin-right:auto;
         margin-left:auto;
         .logo{
@@ -135,7 +126,7 @@ export default {
               text-transform: uppercase;
             }
           }
-          a:hover{
+          a:hover{ /* blog的样式 */
             cursor: pointer;
             color:#7ccfd7;
             background: linear-gradient(to bottom, #7ccfd7, #fff); /*设置渐变背景色*/
@@ -153,7 +144,7 @@ export default {
       }
       @media screen and (min-width: 768px) {
         .navContainer{
-          width:750px;
+          width:800px;
         }
       }
     }
@@ -184,16 +175,17 @@ export default {
   75% {-webkit-mask-position: 860px 0px;-webkit-mask-size:20%;}
   100% {-webkit-mask-position: 0px 0px;-webkit-mask-size:100%;}
 }
-.mask{
+.mao1{
   width:100%;
-  height:456px;
-  background: black url('http://demo.cssmoban.com/cssthemes4/cpts_979_byu/images/banner.jpg');
+  height:100%;
+  background:linear-gradient(151.1deg, #3ab39b, #88df94);
+  transition: opacity 600ms;
   // -webkit-mask-image: url('http://demo.cssmoban.com/cssthemes5/cpts_1053_boo/images/about-3.jpg');
   // -webkit-mask-image:linear-gradient(to left, transparent, blue);
   // animation: mask 10s linear infinite forwards;
 }
 
-@media only screen and (max-width:800px){
+@media only screen and (max-width:818px){
   .menu span.menuIcon{
     display:block;
     width:35px;
@@ -203,7 +195,7 @@ export default {
     cursor: pointer;
   }
 }
-@media only screen and (max-width:800px){
+@media only screen and (max-width:818px){
   .menu ul{
     display: none;
   }

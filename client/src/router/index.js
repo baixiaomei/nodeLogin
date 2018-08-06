@@ -5,7 +5,10 @@ import register from '@/components/register'
 import login from '@/components/login'
 import practice from '@/components/practice'
 import lottery from '@/components/lottery'
-import list from '@/components/list'
+import echart1 from '@/components/echart1'
+import login1 from '@/components/login1'
+import grid from '@/components/grid'
+
 Vue.use(Router)
 
 export default new Router({
@@ -32,9 +35,17 @@ export default new Router({
       name: 'lottery',
       component: lottery
     }, {
-      path: '/list',
-      name: 'list',
-      component: list
+      path: '/echart1',
+      name: 'echart1',
+      component: echart1
+    }, {
+      path: '/login1',
+      name: 'login1',
+      component: login1
+    }, {
+      path: '/grid',
+      name: 'grid',
+      component: grid
     }
   ]
 })

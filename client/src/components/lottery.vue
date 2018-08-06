@@ -22,9 +22,9 @@ export default {
   data () {
     return {
       winnum: '', // 中奖得下标
-      start_rotating_degree: 0,
-      rotate_angle: 0, // 转盘要旋转得度数
-      rotate_transition: "transform 12s ease-in-out",
+      startRotating_degree: 0,
+      rotateAngle: 0, // 转盘要旋转得度数
+      rotateTransition: 'transform 12s ease-in-out',
       list: [
         {
           'name': '10元',
@@ -79,18 +79,18 @@ export default {
     },
     rotating (index) {
       console.log(index)
-      var result_index = index
-      this.rotate_transition = 'transform 6s cubic-bezier(0.25,0.1,0.01,1)'
-      if (this.start_rotating_degree < 0) {
-        this.start_rotating_degree = 0
+      var resultIndex = index
+      this.rotateTransition = 'transform 6s cubic-bezier(0.25,0.1,0.01,1)'
+      if (this.startRotatingDegree < 0) {
+        this.startRotatingDegree = 0
       } else {
-        this.start_rotating_degree = this.start_rotating_degree + Math.floor(360 * 100 / this.list.length) / 200
+        this.startRotatingDegree = this.startRotatingDegree + Math.floor(360 * 100 / this.list.length) / 200
       }
 
-      var rotate_angle = this.start_rotating_degree + 360 * 10 + Math.floor(-360 * 100 / this.list.length) / 200 - Math.floor(360 * 100 / this.list.length) * result_index / 100
-      this.start_rotating_degree = rotate_angle
-      this.rotate_angle = 'rotate(' + rotate_angle + 'deg)'
-      console.log(rotate_angle)
+      var rotateAngle = this.startRotatingDegree + 360 * 10 + Math.floor(-360 * 100 / this.list.length) / 200 - Math.floor(360 * 100 / this.list.length) * resultIndex / 100
+      this.startRotatingDegree = rotateAngle
+      this.rotateAngle = 'rotate(' + rotateAngle + 'deg)'
+      console.log(rotateAngle)
     }
   }
 }
