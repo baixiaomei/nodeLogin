@@ -8,6 +8,9 @@ import lottery from '@/components/lottery'
 import echart1 from '@/components/echart1'
 import login1 from '@/components/login1'
 import grid from '@/components/grid'
+import mock from '@/components/mock'
+// 在lazyload这个路由下懒加载lazyload组建
+const lazyload = () => import('@/components/lazyload')
 
 Vue.use(Router)
 
@@ -17,6 +20,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
+      meta: { title: '首页', navBar: true },
       component: index
     }, {
       path: '/register',
@@ -46,6 +50,14 @@ export default new Router({
       path: '/grid',
       name: 'grid',
       component: grid
+    }, {
+      path: '/mock',
+      name: 'mock',
+      component: mock
+    }, {
+      path: '/lazyload',
+      name: 'lazyload',
+      component: lazyload
     }
   ]
 })

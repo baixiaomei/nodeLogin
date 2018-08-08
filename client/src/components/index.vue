@@ -1,5 +1,19 @@
 <template>
   <div id="index" ref='index'>
+    <header class="header" v-if="$route.meta.navBar">
+      <nav class="inner">
+        <router-link :to="{ name: 'index' }" exact>
+          首页
+        </router-link>
+        <router-link :to="{ name: 'login' }" exact>
+          <i class="iconfont icon-help"></i>
+            去登陆
+        </router-link>
+        <a href="javascript:;" class="userAccount" >
+          我的
+        </a>
+      </nav>
+    </header>
     <div v-if='noToken' class='noToken'>
       <div class='login' @click='goLoginEvent'>登陆</div>
       <div class='register' @click='goRegisterEvent'>注册</div>
