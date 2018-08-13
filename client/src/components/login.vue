@@ -1,11 +1,11 @@
 <template>
-  <div class="login">
+  <div class="register">
     <transition name='form-fade' mode="in-out">
       <div class='content'>
         <div class='manage_tip'>
           <p>elm后台管理系统</p>
         </div>
-        <el-form :model="info" ref="info" :rules="rules"  label-width="50px" class="demo-ruleForm">
+        <el-form :model="info" ref="informate" :rules="rules"  label-width="50px" class="demo-ruleForm">
           <el-form-item label="姓名:" prop="name">
           <el-input v-model.number="info.name" placeholder='请输入用户名'></el-input>
           </el-form-item>
@@ -35,14 +35,14 @@ export default {
       } else {
         callback()
       }
-    };
+    }
     var validatePassword = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
         callback()
       }
-    };
+    }
     return {
       isReg: false,
       info: {
@@ -64,19 +64,42 @@ export default {
       this.$router.push({name: 'register'})
     },
     submitForm (info) {
-      this.$http.post('http://localhost:3000/users/login', info).then(res => {
-        if (res.data.code === 201) {
-          alert('没有此账户请去登陆')
-          this.isReg = true
-        } else if (res.data.code === 200) {
-          alert(res.data.msg)
-          sessionStorage.setItem('token', res.data.token)
-          this.$router.push({name: 'index'})
+      this.$refs.informate.validate(async (valid) => {
+        if (valid) {
+          this.$http.post('http://localhost:3000/users/login', info).then(res => {
+            if (res.data.code === 201) {
+              this.$message({
+                message: '没有此账户请去注册',
+                type: 'success',
+                showClose: true
+              })
+              this.isReg = true
+            } else if (res.data.code === 200) {
+              this.$message({
+                message: '登陆成功',
+                type: 'success',
+                duration: 2000
+              })
+              sessionStorage.setItem('token', res.data.token)
+              this.$router.push({name: 'manage'})
+            } else {
+              this.$message({
+                message: res.data.msg,
+                type: 'error',
+                showClose: true
+              })
+            }
+          }).catch(err => {
+            console.error(err)
+          })
         } else {
-          alert(res.data.msg)
+          this.$message({
+            message: '请填入正确的信息',
+            type: 'error',
+            showClose: true
+          })
+          return false
         }
-      }).catch(err => {
-        console.error(err)
       })
     }
   }
@@ -87,7 +110,7 @@ export default {
 <style scoped lang='less'>
 @import '../style/mixin.less';
 
-.login{
+.register{
   width:100%;
   height:100%;
   background: #324057;
@@ -98,7 +121,6 @@ export default {
     padding:25px;
     border-radius:5px;
     text-align: center;
-    background-color: #fff;
     .manage_tip{
       position:absolute;
       width:100%;

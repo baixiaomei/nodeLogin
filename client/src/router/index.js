@@ -11,6 +11,12 @@ import grid from '@/components/grid'
 import mock from '@/components/mock'
 // 在lazyload这个路由下懒加载lazyload组建
 const lazyload = () => import('@/components/lazyload')
+// 后台管理系统的外壳
+const manage = () => import('@/components/manage')
+// 后台管理系统的首页
+const home = () => import('@/components/home')
+// 用户列表
+const userList = () => import('@/components/userList')
 
 Vue.use(Router)
 
@@ -58,6 +64,22 @@ export default new Router({
       path: '/lazyload',
       name: 'lazyload',
       component: lazyload
+    }, {
+      path: '/manage',
+      name: 'manage',
+      component: manage,
+      children: [
+        {
+          path: '',
+          component: home,
+          meta: []
+        },
+        {
+          path: '/userList',
+          component: userList,
+          meta: ['数据管理', '用户列表']
+        }
+      ]
     }
   ]
 })
