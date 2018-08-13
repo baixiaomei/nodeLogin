@@ -37,7 +37,8 @@ router.post('/register', function (req, res) {
       })
     } else {
       // 往user表里添加一条数据 后面的CVALUES（）？号个数要与前面的对应
-      let addSql = 'INSERT INTO user (name,password) VALUES(?,?)';
+      // let addSql = 'INSERT INTO user (name,password) VALUES(?,?)';
+      let addSql = "INSERT INTO user (name,password) VALUES('" + params.name + "','" + params.password + "')"
       /* 插入 */
         conn.query(addSql, [params.name, params.password], function (err, result) {
           if (err) {

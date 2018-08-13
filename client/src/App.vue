@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition name='fade' mode="out-in" appear>
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -12,4 +14,18 @@ export default {
 
 <style>
 @import url("./style/reset.less");
+html, body{
+  width:100%;
+  height:100%;
+}
+#app{
+  width:100%;
+  height:100%;
+}
+.fadesd-enter-active, .fadesd-leave-active {
+    transition: all .2s ease;
+  }
+  .fadesd-enter, .fadesd-leave-active {
+    opacity: 0;
+  }
 </style>
