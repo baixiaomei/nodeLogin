@@ -13,6 +13,7 @@ var conn1 = mysql.createConnection(config.mysql)
 //执行创建连接
 conn1.connect();
 
+// index页面的section
 router.post('/section', function (req, res) {
   // sql语句 查询section里的所有语句
   let sectionSql = "select * from section"
@@ -29,6 +30,7 @@ router.post('/section', function (req, res) {
   })
 })
 
+// 添加商家
 router.post('/businessList', function (req, res) {
   let params = req.body
   console.log(req)
@@ -98,6 +100,22 @@ router.post('/getGoodList', function (req, res) {
     })
   })
   // let sectionSql = "select * from businessList; SELECT * FROM businessList limit " + start + ", " + params.pageSize
+})
+
+// 商家列表 删除对应商家
+router.post('/deleteShop', function (req, res) {
+  let params = req.body
+  let deleteSql = 'delete from businessList where id='+ params.id
+  conn1.query(deleteSql, function (error, results) {
+    if (error) {
+      console.log('[SELECT ERROR] -', err.message)
+      return;
+    }
+    console.log(results)
+    res.send({
+      code: 200
+    })
+  })
 })
 
 module.exports = router;

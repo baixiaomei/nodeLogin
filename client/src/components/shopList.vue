@@ -41,7 +41,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.$index, scope.row, scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -117,8 +117,19 @@ export default {
     handleEdit (index, row) {
       console.log(index, row)
     },
-    handleDelete (index, row) {
-      console.log(index, row)
+    async handleDelete (index, row, id) {
+      this.$http.post('http://localhost:3000/deleteShop', {
+        id: id
+      })
+        .then((res) => {
+          if (res.data.code === 200) {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
+            this.getdata()
+          }
+        })
     },
     // 分页
     handleSizeChange (val) {
