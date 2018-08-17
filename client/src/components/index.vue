@@ -34,6 +34,7 @@
               </li>
             </ul>
           </div>
+          <div class='btn'>平台页面</div>
         </div>
       </div>
       <div class='mao1'>

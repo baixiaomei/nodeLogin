@@ -9,7 +9,7 @@
         <el-table-column prop='address' label='地址' ></el-table-column>
       </el-table>
       <div class="block">
-        <span class="demonstration">共 {{count}} 条记录  第 1/{{pages}}页</span>
+        <span class="demonstration">共 {{count}} 条记录  第 {{currentPage3}}/{{pages}}页</span>
         <el-pagination
           background
           @size-change="handleSizeChange"
@@ -74,8 +74,8 @@ export default {
     async initData () {
       try {
         const countData = await getUserCount()
-        if (countData.data.status === 1) {
-          this.count = countData.data.count
+        if (countData.status === 1) {
+          this.count = countData.count
         } else {
           throw new Error('获取数据失败')
         }
@@ -87,7 +87,7 @@ export default {
     async getUsers () {
       const user = await getUserList({offset: this.offset, limit: this.limit})
       this.tableData2 = []
-      user.data.forEach(item => {
+      user.forEach(item => {
         const tableData = {}
         tableData.name = item.username
         tableData.date = item.registe_time
@@ -101,7 +101,7 @@ export default {
     },
     handleCurrentChange (val) {
       this.currentPage3 = val
-      this.offset = (val -1) * this.limit
+      this.offset = (val - 1) * this.limit
       this.getUsers()
     },
     tableRowClassName ({row, rowIndex}) {

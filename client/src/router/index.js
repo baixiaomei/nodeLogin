@@ -18,6 +18,13 @@ const home = () => import('@/components/home')
 // 用户列表
 const userList = () => import('@/components/userList')
 
+// background-attached
+const fixed = () => import('@/components/fixed')
+
+const addShop = () => import('@/components/addShop')
+// 注册商家列表
+const shopList = () => import('@/components/shopList')
+
 Vue.use(Router)
 
 export default new Router({
@@ -73,13 +80,23 @@ export default new Router({
           path: '',
           component: home,
           meta: []
-        },
-        {
+        }, {
           path: '/userList',
           component: userList,
           meta: ['数据管理', '用户列表']
+        }, {
+          path: '/addShop',
+          component: addShop,
+          meta: ['添加数据', '添加商铺']
+        }, {
+          path: '/shopList',
+          component: shopList,
+          meta: ['添加数据', '商家列表']
         }
       ]
+    }, {
+      path: '/fixed',
+      component: fixed
     }
   ]
 })
