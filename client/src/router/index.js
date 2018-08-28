@@ -25,6 +25,8 @@ const addShop = () => import('@/components/addShop')
 // 注册商家列表
 const shopList = () => import('@/components/shopList')
 
+// 食品列表
+const foodList = () => import('@/components/foodList')
 Vue.use(Router)
 
 export default new Router({
@@ -92,6 +94,10 @@ export default new Router({
           path: '/shopList',
           component: shopList,
           meta: ['添加数据', '商家列表']
+        }, {
+          path: '/foodList',
+          component: foodList,
+          meta: ['数据管理', '食品列表']
         }
       ]
     }, {

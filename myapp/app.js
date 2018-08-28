@@ -3,12 +3,25 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var app = express();
+var http = require('http').Server(app)
+var io = require('socket.io')(http);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// var registerRouter = require('./routes/register');
 
-var app = express();
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + 'index.html')
+})
+
+io.on('connection', function (socket) {
+  console.log('a user connected')
+  socket.on('disconnect', function (msg) {
+    console.log('user discounnected');
+    io.emit('chat message', msg)
+  })
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +45,6 @@ app.use('*', function(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/www/register', registerRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

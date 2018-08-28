@@ -12,8 +12,9 @@ export default {
 }
 </script>
 
-<style>
-@import url("./style/reset.less");
+<style lang='less'>
+@import "./style/reset.less";
+@import "./style/mixin.less";
 html, body{
   width:100%;
   height:100%;

@@ -5,8 +5,7 @@ import App from './App'
 import router from './router'
 import http from './utils/axios'
 import ElementUI from 'element-ui'
-
-// 引入状态管理机
+// 引入状态管理机a
 import store from './store'
 // mock数据
 import './mock'

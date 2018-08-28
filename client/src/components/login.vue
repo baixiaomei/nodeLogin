@@ -17,8 +17,16 @@
             <el-button v-if='isReg' type="primary" @click="replaceRegister">去注册</el-button>
           </el-form-item>
         </el-form>
+       <a @click='WebSocketTest()'>运行 WebSocket</a>
       </div>
     </transition>
+    <div id='box'>
+      <ul id='messages'></ul>
+      <form action=''>
+        <input id='m' ref='input' autocomplete='off'>
+        <button @click='submitFn'>send</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -60,13 +68,39 @@ export default {
     }
   },
   methods: {
+    submitFn () {
+      this.$refs.input
+    },
+    WebSocketTest () {
+      console.log(1)
+      // if ('webSocket' in window) {
+      //   alert('您的浏览器支持WebSocket')
+      // } else {
+      //   return false
+      // }
+      var ws = new WebSocket('ws://localhost:8080/echo')
+      ws.onopen = function () {
+        ws.send('发送数据')
+        alert('数据发送中。。。')
+      }
+
+      ws.onmessage = function (evt) {
+        var receivedMsg = evt.data
+        console.log(receivedMsg)
+        alert('数据已接受。。。')
+      }
+
+      ws.onclose = function () {
+        alert('连接已关闭')
+      }
+    },
     replaceRegister () {
       this.$router.push({name: 'register'})
     },
     submitForm (info) {
       this.$refs.informate.validate(async (valid) => {
         if (valid) {
-          this.$http.post('http://localhost:3000/users/login', info).then(res => {
+          this.$http.post('/users/login', info).then(res => {
             if (res.data.code === 201) {
               this.$message({
                 message: '没有此账户请去注册',
@@ -81,7 +115,8 @@ export default {
                 duration: 2000
               })
               sessionStorage.setItem('token', res.data.token)
-              this.$router.push({name: 'manage'})
+              // this.$router.push({name: 'manage'})
+              window.location.href = 'http://localhost:8080/manage'
             } else {
               this.$message({
                 message: res.data.msg,
@@ -107,7 +142,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang='less'>
+<style  lang='less'>
 @import '../style/mixin.less';
 
 .register{
@@ -149,4 +184,14 @@ export default {
   transform: translate3d(0, -50px, 0);
   opacity: 0;
 }
+#box{
+  width:100%;
+  height:80px;
+}
+form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 5px 10px; }
+#messages li:nth-child(odd) { background: #eee; }
 </style>

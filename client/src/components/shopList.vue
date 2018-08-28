@@ -127,7 +127,10 @@ export default {
               message: '删除成功',
               type: 'success'
             })
-            this.getdata()
+            // 重新获取数据
+            // this.getdata()
+            // 返回 去掉第index 的一个元素的数组
+            this.tableData.splice(index, 1)
           }
         })
     },

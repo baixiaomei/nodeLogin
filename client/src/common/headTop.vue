@@ -1,7 +1,7 @@
 <template>
   <div class='header'>
     <el-breadcrumb separator="/" class='fl'>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in $route.meta" :key='index'>{{item}}</el-breadcrumb-item>
     </el-breadcrumb>
     <div class='fc'></div>
@@ -45,6 +45,7 @@ export default {
     padding-left:10px;
     padding-right:10px;
     box-sizing: border-box;
+    background: #EFF2F7;
     .fl,fl{
       grid-area:fl;
       height:60px;
