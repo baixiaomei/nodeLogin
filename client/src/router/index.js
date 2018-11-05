@@ -27,6 +27,15 @@ const shopList = () => import('@/components/shopList')
 
 // 食品列表
 const foodList = () => import('@/components/foodList')
+
+// 上传图片和表单 element
+const addVehicle = () => import('@/components/addVehicle')
+
+// 上传图片和表单 lrz
+const upload = () => import('@/components/upload')
+
+// lowdb使用例子
+const lowdb = () => import('@/components/lowdb')
 Vue.use(Router)
 
 export default new Router({
@@ -98,11 +107,22 @@ export default new Router({
           path: '/foodList',
           component: foodList,
           meta: ['数据管理', '食品列表']
+        }, {
+          path: '/addVehicle',
+          component: addVehicle,
+          meta: ['上传图片', '表单和图片一起上传']
+        }, {
+          path: '/upload',
+          component: upload,
+          meta: ['上传图片', '表单和图片一起上传2']
         }
       ]
     }, {
       path: '/fixed',
       component: fixed
+    }, {
+      path: '/lowdb',
+      component: lowdb
     }
   ]
 })

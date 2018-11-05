@@ -42,6 +42,11 @@
             <template slot="title"><i class='el-icon-warning'></i>说明</template>
             <el-menu-item index='explain'>说明</el-menu-item>
           </el-submenu>
+          <el-submenu index='8'>
+            <template slot='title'><i class='el-icon-warning'></i>上传图片</template>
+            <el-menu-item index='addVehicle'>表单和图片一起上传</el-menu-item>
+            <el-menu-item index='upload'>表单和图片一起上传</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-col>
       <el-col :span='20' style="height:100%;overflow-y:scroll;">

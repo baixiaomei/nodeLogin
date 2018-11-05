@@ -7,14 +7,7 @@
   </head>
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <body>
-    <!-- <div id="main"></div> -->
-    <div id='box'>
-      <ul id='messages'></ul>
-      <form action=''>
-        <input id='m' ref='input' autocomplete='off'>
-        <button>send</button>
-      </form>
-    </div>
+    <div id="main"></div>
     <!-- <div id='qrcode'></div> -->
     <!-- built files will be auto injected -->
   </body>
@@ -22,8 +15,6 @@
 <script src="./static/qrcode.min.js"></script>
 <script src="./static/echarts.js"></script>
 <script src='src/utils/fixed.js'></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src='https://code.jquery.com/jquery-1.11.1.js'></script>
 
 <script>
   // new QRCode(document.getElementById('qrcode'), '18301012472')
@@ -35,12 +26,4 @@
     colorLight: '#fff'
   })
 
-  $(function () {
-    var socket = io()
-    $('form').submit(function () {
-      socket.emit('chat message', $('#m').val())
-      $('#m').val('')
-      return false
-    })
-  })
 </script>

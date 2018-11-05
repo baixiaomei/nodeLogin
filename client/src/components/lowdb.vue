@@ -24,10 +24,6 @@
 
 <script>
 export default {
-  name: 'login',
-  // components: {
-  //   Form: () => import('element-ui').then(({Form}) => Form)
-  // },
   data () {
     var validateName = (rule, value, callback) => {
       if (value === '') {
@@ -66,40 +62,9 @@ export default {
     submitForm (info) {
       this.$refs.informate.validate(async (valid) => {
         if (valid) {
-          this.$http.post('/users/login', info).then(res => {
-            if (res.data.code === 201) {
-              this.$message({
-                message: '没有此账户请去注册',
-                type: 'success',
-                showClose: true
-              })
-              this.isReg = true
-            } else if (res.data.code === 200) {
-              this.$message({
-                message: '登陆成功',
-                type: 'success',
-                duration: 2000
-              })
-              sessionStorage.setItem('token', res.data.token)
-              // this.$router.push({name: 'manage'})
-              window.location.href = 'http://localhost:8080/manage'
-            } else {
-              this.$message({
-                message: res.data.msg,
-                type: 'error',
-                showClose: true
-              })
-            }
-          }).catch(err => {
-            console.error(err)
+          this.$http.post('/addData', info).then(res => {
+            console.log(res)
           })
-        } else {
-          this.$message({
-            message: '请填入正确的信息',
-            type: 'error',
-            showClose: true
-          })
-          return false
         }
       })
     }
@@ -154,5 +119,4 @@ export default {
   width:100%;
   height:80px;
 }
-
 </style>
