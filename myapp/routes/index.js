@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql')
 const config = require('../config')
+var fs = require('fs')
+// var formidable = require('formidable');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -116,6 +118,37 @@ router.post('/deleteShop', function (req, res) {
       code: 200
     })
   })
+})
+
+router.post('/upload', function (req, res) {
+  console.log('req', req)
+})
+
+// 接收前端传过来的表单和图片（element-ui）
+router.post('/insertForm', function (req, res, next) {
+  console.log(req)
+  let base64 = req.body.imgFile.replace(/^data:image\/\w+;base64,/, "")
+  // 把图片转换成buffer对象
+  let dataBuffer = new Buffer(base64, 'base64')
+  // 保存图片的地址是
+  let path = 'static/upload/image' + '.jpg'
+  // 保存图片
+  fs.writeFile(path, dataBuffer, (err) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('保存图片成功')
+    }
+  })
+  // var form = new formidable.IncomingForm()
+  // // 设置文件上传存放地址
+  // form.uploadDir = './public/images'
+  // // 执行里面的回调的时候，表单已经全部接收完毕
+  // form.parse(req, function (err, fields, files) {
+  //   console.log("files:", files)
+  //   console.log(err)
+  //   console.log('fields', fields)
+  // })
 })
 
 module.exports = router;
