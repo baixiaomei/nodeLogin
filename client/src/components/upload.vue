@@ -5,14 +5,13 @@
     <el-form :model="formCar" style='margin:16px auto; width:50%;' size="small" ref='formCar'>
         <el-form-item label="车辆图片" :label-width="formLabelWidth">
           <div class='upImg'>
-            <!-- <img class='pushImg' src="../assets/pic1.png" alt=""> -->
             <img id="upimglsdoImg" :src='upimg1' />
             <div id="upimg1Btn">
               <form enctype="multipart/form-data" method="post">
                 <input type="file" name="file1" multipart id="file1"  accept="image/*"  class="uploadImg"  @change="chooseImg($event)"/>
                 <!-- <input type="file" name="file1" multipart id="file1" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"  class="uploadImg"  @change="chooseImg($event)"/> -->
               </form>
-              <img class='pushImg' src="../assets/upimg.png" alt="">
+              <!-- <img class='pushImg' src="../assets/upimg.png" alt=""> -->
             </div>
           </div>
         </el-form-item>
@@ -70,7 +69,7 @@
 <script>
 import lrz from 'lrz'
 import headTop from '../common/headTop'
-import againsts from '../assets/pic1.png'
+// import againsts from '../assets/pic1.png'
 export default {
   components: {
     headTop
@@ -90,7 +89,7 @@ export default {
         engineNum: '', // 发动机号
         powerType: '' // 动力类型
       },
-      upimg1: againsts
+      upimg1: ''
     }
   },
   methods: {
@@ -121,7 +120,6 @@ export default {
       }
     },
     handleImg (img) {
-      console.log(img)
       return img.split(',')[1]
     },
     insertDriver (formName) {
@@ -144,10 +142,8 @@ export default {
           }
           this.$http.post('/insertForm', param)
             .then((res) => {
-              console.log('res', res)
             })
         } else {
-          console.log('error submit!!')
           return false
         }
       })

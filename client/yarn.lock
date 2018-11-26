@@ -1683,7 +1683,7 @@ css-color-names@0.0.4:
   version "0.0.4"
   resolved "http://registry.npm.taobao.org/css-color-names/download/css-color-names-0.0.4.tgz#808adc2e79cf84738069b646cb20ec27beb629e0"
 
-css-loader@^0.28.0:
+css-loader@^0.28.11:
   version "0.28.11"
   resolved "http://registry.npm.taobao.org/css-loader/download/css-loader-0.28.11.tgz#c3f9864a700be2711bb5a2462b2389b1a392dab7"
   dependencies:
@@ -6343,7 +6343,7 @@ vue-router@^3.0.1:
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
 
-vue-style-loader@^3.0.0, vue-style-loader@^3.0.1:
+vue-style-loader@^3.0.0, vue-style-loader@^3.1.2:
   version "3.1.2"
   resolved "http://registry.npm.taobao.org/vue-style-loader/download/vue-style-loader-3.1.2.tgz#6b66ad34998fc9520c2f1e4d5fa4091641c1597a"
   dependencies:

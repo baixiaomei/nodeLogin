@@ -115,7 +115,6 @@ export default {
         })
     },
     handleEdit (index, row) {
-      console.log(index, row)
     },
     async handleDelete (index, row, id) {
       this.$http.post('http://localhost:3000/deleteShop', {
@@ -136,7 +135,6 @@ export default {
     },
     // 分页
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       this.currentPage3 = val

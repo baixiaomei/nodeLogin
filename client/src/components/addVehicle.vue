@@ -93,7 +93,6 @@ export default {
       this.dialogVisible = true
     },
     beforeupload (file) {
-      console.log(file)
       // 创建临时的路径来展示图片
       var windowURL = window.URL || window.webkitURL
       this.src = windowURL.createObjectURL(file)
@@ -103,30 +102,30 @@ export default {
       return false
     },
     handleRemove (file, fileList) {
-      console.log(file, fileList)
     },
     insertDriver (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let param = {
-            plateNumber: this.formCar.licenseNum,
-            motorcycleType: this.formCar.vehicleModel,
-            carLength: this.formCar.vehicleLong,
-            plateNumberType: this.formCar.flapperType,
-            brandModel: this.formCar.brandType,
-            vinNo: this.formCar.carframe,
-            engineNo: this.formCar.engineNum,
-            powerType: this.formCar.powerType,
-            imgFile: this.formCar.dialogImageUrl
-          }
-          console.log(param)
+          // let param = {
+          //   plateNumber: this.formCar.licenseNum,
+          //   motorcycleType: this.formCar.vehicleModel,
+          //   carLength: this.formCar.vehicleLong,
+          //   plateNumberType: this.formCar.flapperType,
+          //   brandModel: this.formCar.brandType,
+          //   vinNo: this.formCar.carframe,
+          //   engineNo: this.formCar.engineNum,
+          //   powerType: this.formCar.powerType,
+          //   imgFile: this.formCar.dialogImageUrl
+          // }
           this.param.append('plateNumber', this.formCar.licenseNum)
           this.axios.post('/services/vp/wlh/addCarInfo', this.param)
             .then((res) => {
-              console.log(res)
             })
         } else {
-          console.log('error submit!!')
+          this.$message({
+            type: 'error',
+            message: '查询信息有误'
+          })
           return false
         }
       })
@@ -134,19 +133,23 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
-.addVehicle-content-main
-  margin 16px
-  min-height 800px
-  .el-form-item
-    margin-bottom 18px
-.addVehicle-content-screening
-  display block
-  box-sizing border-box
+<style lang="less">
+.addVehicle-content-main{
+  margin:16px;
+  min-height: 800px;
+}
+  .el-form-item{
+    margin-bottom:18px;
+  }
 
-  .addCarBtn
-    display flex
-    align-items center
-    justify-content center
+.addVehicle-content-screening{
+  display: block;
+  box-sizing: border-box;
+}
 
+  .addCarBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
 </style>

@@ -27,7 +27,6 @@ export default {
     let screenSizeWidth = $('body').width()
     let screenSizeHeight = $('body').height()
     this.halfvmin = (screenSizeWidth > screenSizeHeight ? screenSizeHeight / 2 : screenSizeWidth / 2) * 0.8
-    console.log('halfvmin', this.halfvmin)
     $(document).on('click', (e) => {
       this.x = e.pageX
       this.y = e.pageY
@@ -36,7 +35,6 @@ export default {
   },
   methods: {
     waveMove (x, y, z) {
-      console.log(x, y, z)
       this.z = z
       this.show = true
       setTimeout(() => {

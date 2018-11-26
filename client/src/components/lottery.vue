@@ -78,7 +78,6 @@ export default {
       this.rotating(this.winnum)
     },
     rotating (index) {
-      console.log(index)
       var resultIndex = index
       this.rotateTransition = 'transform 6s cubic-bezier(0.25,0.1,0.01,1)'
       if (this.startRotatingDegree < 0) {
@@ -90,7 +89,6 @@ export default {
       var rotateAngle = this.startRotatingDegree + 360 * 10 + Math.floor(-360 * 100 / this.list.length) / 200 - Math.floor(360 * 100 / this.list.length) * resultIndex / 100
       this.startRotatingDegree = rotateAngle
       this.rotateAngle = 'rotate(' + rotateAngle + 'deg)'
-      console.log(rotateAngle)
     }
   }
 }

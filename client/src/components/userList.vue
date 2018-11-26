@@ -81,7 +81,7 @@ export default {
         }
         this.getUsers()
       } catch (err) {
-        console.log('获取数据失败', err)
+        this.$message('获取数据失败')
       }
     },
     async getUsers () {

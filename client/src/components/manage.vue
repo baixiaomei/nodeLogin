@@ -1,7 +1,7 @@
 <template>
   <div class='manage_page fillcontain'>
     <el-row style='height:100%;'>
-      <el-col :span='4' style="height:100%; overflow:hidden;">
+      <el-col :span='2' style="height:100%; overflow:hidden;">
         <el-menu :default-active='defaultActive' style='min-height:100%;'
          background-color="#324057"
         text-color="#fff"
@@ -49,7 +49,7 @@
           </el-submenu>
         </el-menu>
       </el-col>
-      <el-col :span='20' style="height:100%;overflow-y:scroll;">
+      <el-col :span='22' style="height:100%;overflow-y:scroll;">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -68,7 +68,11 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.path.replace('/', ''))
+    let result = [1, 2, 3].reduce((accumulator, item) => {
+      console.log(accumulator, item)
+      return accumulator + item
+    }, 0)
+    console.log(result)
   }
 }
 </script>

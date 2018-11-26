@@ -86,7 +86,7 @@ export default {
           this.allOrderCount = res[4].count
           this.allAdminCount = res[5].count
         }).catch(err => {
-          console.log(err)
+          this.$message(err)
         })
     },
     async getSevenData () {
@@ -96,9 +96,7 @@ export default {
         apiArr[1].push(orderCount(item))
         apiArr[2].push(adminDayCount(item))
       })
-      console.log(apiArr)
       const promiseArr = [...apiArr[0], ...apiArr[1], ...apiArr[2]]
-      console.log(promiseArr)
       Promise.all(promiseArr).then(res => {
         const resArr = [[], [], []]
         res.forEach((item, index) => {
@@ -108,7 +106,7 @@ export default {
         })
         this.sevenDate = resArr
       }).catch(err => {
-        console.log(err)
+        this.$message(err)
       })
     },
     async getPost () {

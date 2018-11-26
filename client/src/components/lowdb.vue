@@ -63,7 +63,6 @@ export default {
       this.$refs.informate.validate(async (valid) => {
         if (valid) {
           this.$http.post('/addData', info).then(res => {
-            console.log(res)
           })
         }
       })

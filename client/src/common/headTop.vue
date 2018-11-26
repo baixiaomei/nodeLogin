@@ -29,7 +29,17 @@ export default {
   },
   methods: {
     handleCommand (command) {
-      console.log(command)
+      if (command === 'changPassword') {
+        this.$message({
+          type: 'success',
+          message: '修改密码成功'
+        })
+      } else if (command === 'singout') {
+        this.$message({
+          type: 'success',
+          message: '注销成功'
+        })
+      }
     }
   }
 }

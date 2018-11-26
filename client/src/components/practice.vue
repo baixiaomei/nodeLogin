@@ -24,20 +24,13 @@ export default {
     }
   },
   beforeCreate () {
-    console.group('----beforeCreate创建前状态----')
-    console.log('%c%s', 'color:red', 'el:' + this.$el)
-    console.log('%c%s', 'color:red', 'data:' + this.$data)
-    console.log('%c%s', 'color:red', 'el:' + this.$el)
   },
   created () { // 还没有初始化el  el是挂载的dom
-    console.log(this.$refs.index)
-    console.log(sessionStorage.getItem('token'))
     if (sessionStorage.getItem('token')) {
       this.noToken = false
     }
   },
   mounted () { // el才加载完毕
-    console.log(this.$refs.index)
   },
   methods: {
     goRegisterEvent () {

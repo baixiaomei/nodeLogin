@@ -60,7 +60,6 @@ export default {
   methods: {
     submitForm (formName) {
       this.$http.post('http://localhost:3000/businessList', formName).then(res => {
-        console.log(res)
         if (res.data.code === 200) {
           this.$message({
             message: '添加成功',
